@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { Flag, Play, BarChart3, Settings, MoreHorizontal } from 'lucide-react';
+import { Flag, Play, BarChart3, Settings, MoreHorizontal, Download, Sparkles, LogOut } from 'lucide-react';
 import { C } from '../theme.js';
 import BigButton from './BigButton.jsx';
 
-export default function Home({ activeRound, currentHole, roundsCount, onStart, onResume, onAbandon, onFinishNow, onStats, onSettings }) {
+export default function Home({
+  activeRound, currentHole, roundsCount, onStart, onResume, onAbandon, onFinishNow, onStats, onSettings, onExport,
+  onCoach, onSignOut, displayName,
+}) {
   const [showMenu, setShowMenu] = useState(false);
   const [confirmAction, setConfirmAction] = useState(null); // null | 'finish' | 'discard'
   const holesLogged = activeRound ? Object.keys(activeRound.holes || {}).length : 0;
@@ -80,6 +83,23 @@ export default function Home({ activeRound, currentHole, roundsCount, onStart, o
       <button onClick={onSettings} style={{ width: '100%', background: 'none', border: 'none', color: C.inkSoft, fontSize: 14, marginTop: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, fontWeight: 600 }}>
         <Settings size={16} /> Edit Course Pars
       </button>
+      <button onClick={onExport} style={{ width: '100%', background: 'none', border: 'none', color: C.inkSoft, fontSize: 14, marginTop: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, fontWeight: 600 }}>
+        <Download size={16} /> Export Data
+      </button>
+      {onCoach && (
+        <button onClick={onCoach} style={{ width: '100%', background: 'none', border: 'none', color: C.inkSoft, fontSize: 14, marginTop: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, fontWeight: 600 }}>
+          <Sparkles size={16} /> Coach's Notes
+        </button>
+      )}
+
+      {onSignOut && (
+        <div style={{ textAlign: 'center', marginTop: 26, paddingTop: 16, borderTop: `1px solid ${C.line}` }}>
+          {displayName && <div style={{ fontSize: 12, color: C.inkSoft, marginBottom: 6 }}>Signed in as {displayName}</div>}
+          <button onClick={onSignOut} style={{ background: 'none', border: 'none', color: C.inkSoft, fontSize: 12.5, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+            <LogOut size={13} /> Sign Out
+          </button>
+        </div>
+      )}
     </div>
   );
 }

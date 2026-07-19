@@ -3,6 +3,8 @@ export const C = {
   card: '#FFFFFF',
   pine: '#1F4B3F',
   pineDark: '#153229',
+  navy: '#1B3A6B',
+  navyShadow: 'rgba(27,58,107,0.28)',
   hit: '#3F8E5C',
   hitBg: '#E7F2EA',
   miss: '#C1443A',
